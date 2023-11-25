@@ -145,3 +145,10 @@ body {
   .submit:active {
     background-color: #06b;
   }
+
+  .image-blob {
+    width: 60%;
+    align-items: center;
+     display: inline;
+    justify-content: center;
+  }

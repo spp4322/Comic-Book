@@ -54,22 +54,33 @@ class Comics extends React.Component {
         text8:'',
         text9:'',
         text10:'',
-        comic_image:null,
-
+        comic_image1:'',
+        comic_image2:'',
+        comic_image3:'',
+        comic_image4:'',
+        comic_image5:'',
+        comic_image6:'',
+        comic_image7:'',
+        comic_image8:'',
+        comic_image9:'',
+        comic_image10:'',
     });
      }
      async handleregistersubmit(e)
      {
       toast("Please Wait until we create your comic !!");
       e.preventDefault();
-      let str=this.state.text1;
+      
       const apikey="VknySbLLTUjbxXAXCjyfaFIPwUTCeRXbFSOjwRiCxsxFyhbnGjSFalPKrpvvDAaPVzWEevPljilLVDBiTzfIbWFdxOkYJxnOPoHhkkVGzAknaOulWggusSFewzpqsNWM";
-      str+=" ";
-      str+=this.state.text2;    str+=" "; str+=this.state.text3;    str+=" ";str+=this.state.text4;    str+=" ";
-      str+=this.state.text5;    str+=" "; str+=this.state.text6;    str+=" ";
-      str+=this.state.text7;    str+=" "; str+=this.state.text8;    str+=" "; 
-      str+=this.state.text9;    str+=" "; str+=this.state.text10;
-      console.log(str);
+      let imgg=new Array(10);
+      let string_ar=[this.state.text1,this.state.text2,this.state.text3,this.state.text4,this.state.text5,this.state.text6,this.state.text7,this.state.text8,this.state.text9,this.state.text10]
+      
+      for(let i=0;i<10;i++)
+      {
+        let ch="text";
+        let numm=i+1;
+        ch+=numm.toString();
+        let str=this.state.ch;
       const response = await fetch(
         "https://xdwvg9no7pefghrn.us-east-1.aws.endpoints.huggingface.cloud",
         {
@@ -80,7 +91,7 @@ class Comics extends React.Component {
           },
           method: "POST",
  
-          body: JSON.stringify({"inputs": str}),
+          body: JSON.stringify({"inputs": string_ar[i]}),
         }
       );
       if(!response.ok) alert("Please build the comic story correctly and try again !!");
@@ -90,13 +101,22 @@ class Comics extends React.Component {
         console.log("hogya");
 
       const result = await response.blob();
-      this.setState({
-        comic_image:result,
-        form_filled: true,
-      });
-
+      imgg[i]=result;
       }
-
+    }
+    this.setState({
+      form_filled: true,
+      comic_image1:imgg[0],
+      comic_image2: imgg[1],
+      comic_image3: imgg[2],
+      comic_image4: imgg[3],
+      comic_image5:imgg[4],
+      comic_image6:imgg[5],
+      comic_image7:imgg[6],
+      comic_image8:imgg[7],
+      comic_image9:imgg[8],
+      comic_image10:imgg[9],
+  });
      }
     render() {
     
@@ -184,7 +204,49 @@ class Comics extends React.Component {
             </div>
                 
                   <div className="image-blob">
-                    <img  src={URL.createObjectURL(this.state.comic_image)} />
+                    <div>
+                    <img  src={URL.createObjectURL(this.state.comic_image1)} />
+                    <h3>1</h3>
+                    </div>
+                    <div>
+                    <img  src={URL.createObjectURL(this.state.comic_image2)} />
+                    <h3>2</h3>
+                    </div>
+                    <div>
+                    <img  src={URL.createObjectURL(this.state.comic_image3)} />
+                    <h3>3</h3>
+                    </div>
+                    <div>
+                    <img  src={URL.createObjectURL(this.state.comic_image4)} />
+                    <h3>4</h3>
+                    </div>
+                    <div>
+                    <img  src={URL.createObjectURL(this.state.comic_image5)} />
+                    <h3>5</h3>
+                    </div>
+                    <div>
+                    <img  src={URL.createObjectURL(this.state.comic_image6)} />
+                    <h3>6</h3>
+                    </div>
+                    <div>
+                    <img  src={URL.createObjectURL(this.state.comic_image7)} />
+                    <h3>7</h3>
+                    </div>
+                    <div>
+                    <img  src={URL.createObjectURL(this.state.comic_image8)} />
+                    <h3>8</h3>
+                    </div>
+                    <div>
+                    <img  src={URL.createObjectURL(this.state.comic_image9)} />
+                    <h3>9</h3>
+                    </div>
+
+                    <div>
+                    <img  src={URL.createObjectURL(this.state.comic_image10)} />
+                    <h3>10</h3>
+                    </div>
+
+
                     <button type="text" class="submit" onClick={(e)=> this.handlerecreate(e)} >Recreate Comic</button>
                     </div>
                   </div>
