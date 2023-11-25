@@ -75,6 +75,7 @@ class Comics extends React.Component {
       let imgg=new Array(10);
       let string_ar=[this.state.text1,this.state.text2,this.state.text3,this.state.text4,this.state.text5,this.state.text6,this.state.text7,this.state.text8,this.state.text9,this.state.text10]
       
+      let cnt=0;
       for(let i=0;i<10;i++)
       {
         let ch="text";
@@ -94,16 +95,18 @@ class Comics extends React.Component {
           body: JSON.stringify({"inputs": string_ar[i]}),
         }
       );
-      if(!response.ok) alert("Please build the comic story correctly and try again !!");
+      if(!response.ok) continue;
       else
       { 
-        alert("done");
+       cnt++;
         console.log("hogya");
 
       const result = await response.blob();
       imgg[i]=result;
       }
     }
+    if(cnt==10){
+      alert("done");
     this.setState({
       form_filled: true,
       comic_image1:imgg[0],
@@ -117,6 +120,11 @@ class Comics extends React.Component {
       comic_image9:imgg[8],
       comic_image10:imgg[9],
   });
+}
+else
+{
+   alert("Please build the comic story correctly and try again !!");
+}
      }
     render() {
     
