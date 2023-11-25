@@ -31,6 +31,7 @@ class Comics extends React.Component {
           text9:'',
           text10:'',
           comic_image:null,
+          spin:false,
 
         };
       }
@@ -70,7 +71,10 @@ class Comics extends React.Component {
      {
       toast("Please Wait until we create your comic !!");
       e.preventDefault();
-      
+      this.setState({
+        spin:true,
+      });
+     
       const apikey="VknySbLLTUjbxXAXCjyfaFIPwUTCeRXbFSOjwRiCxsxFyhbnGjSFalPKrpvvDAaPVzWEevPljilLVDBiTzfIbWFdxOkYJxnOPoHhkkVGzAknaOulWggusSFewzpqsNWM";
       let imgg=new Array(10);
       let string_ar=[this.state.text1,this.state.text2,this.state.text3,this.state.text4,this.state.text5,this.state.text6,this.state.text7,this.state.text8,this.state.text9,this.state.text10]
@@ -99,6 +103,7 @@ class Comics extends React.Component {
       else
       { 
        cnt++;
+      
         console.log("hogya");
 
       const result = await response.blob();
@@ -109,6 +114,7 @@ class Comics extends React.Component {
       alert("done");
     this.setState({
       form_filled: true,
+      spin:false,
       comic_image1:imgg[0],
       comic_image2: imgg[1],
       comic_image3: imgg[2],
@@ -127,6 +133,43 @@ else
 }
      }
     render() {
+
+        if(this.state.spin==true)
+        {
+          return(
+            <svg role="img" aria-label="Mouth and eyes come from 9:00 and rotate clockwise into position, right eye blinks, then all parts rotate and merge into 3:00" class="smiley" viewBox="0 0 128 128" width="128px" height="128px">
+	<defs>
+		<clipPath id="smiley-eyes">
+			<circle class="smiley__eye1" cx="64" cy="64" r="8" transform="rotate(-40,64,64) translate(0,-56)" />
+			<circle class="smiley__eye2" cx="64" cy="64" r="8" transform="rotate(40,64,64) translate(0,-56)" />
+		</clipPath>
+		<linearGradient id="smiley-grad" x1="0" y1="0" x2="0" y2="1">
+			<stop offset="0%" stop-color="#000" />
+			<stop offset="100%" stop-color="#fff" />
+		</linearGradient>
+		<mask id="smiley-mask">
+			<rect x="0" y="0" width="128" height="128" fill="url(#smiley-grad)" />
+		</mask>
+	</defs>
+	<g stroke-linecap="round" stroke-width="12" stroke-dasharray="175.93 351.86">
+		<g>
+			<rect fill="hsl(193,90%,50%)" width="128" height="64" clip-path="url(#smiley-eyes)" />
+			<g fill="none" stroke="hsl(193,90%,50%)">
+				<circle class="smiley__mouth1" cx="64" cy="64" r="56" transform="rotate(180,64,64)" />
+				<circle class="smiley__mouth2" cx="64" cy="64" r="56" transform="rotate(0,64,64)" />
+			</g>
+		</g>
+		<g mask="url(#smiley-mask)">
+			<rect fill="hsl(223,90%,50%)" width="128" height="64" clip-path="url(#smiley-eyes)" />
+			<g fill="none" stroke="hsl(223,90%,50%)">
+				<circle class="smiley__mouth1" cx="64" cy="64" r="56" transform="rotate(180,64,64)" />
+				<circle class="smiley__mouth2" cx="64" cy="64" r="56" transform="rotate(0,64,64)" />
+			</g>
+		</g>
+	</g>
+</svg>
+          );
+        }
     
         if(this.state.form_filled==false){
       return (
